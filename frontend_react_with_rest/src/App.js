@@ -19,6 +19,7 @@ function App() {
   return (
     <div className="App">
       <div>Backend says: {backendResponse} </div>
+      <p>Veneta is testing the redeploymet</p>
     </div>
   );
 }
