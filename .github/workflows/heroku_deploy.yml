@@ -1,0 +1,38 @@
+name: Heroku Deployment
+on:
+  push:
+    branches:
+      - main
+jobs:
+    herokudeploy:
+      name: Deploy to Heroku
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout the code
+          uses: actions/checkout@v2
+        - name: Deploy a6efe8ed6-frontend-react-with
+          uses: akhileshns/heroku-deploy@v3.12.12
+          with:
+            heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+            heroku_app_name: a6efe8ed6-frontend-react-with
+            heroku_email: ${{ secrets.HEROKU_EMAIL }}
+            region: eu
+            usedocker: true
+            appdir: frontend_react_with_rest
+            docker_build_args: |
+              BACKEND_API_URL
+          env:
+            BACKEND_API_URL: 'https://afa720227-rest-python.herokuapp.com'
+        - name: Deploy afa720227-rest-python
+          uses: akhileshns/heroku-deploy@v3.12.12
+          with:
+            heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+            heroku_app_name: afa720227-rest-python
+            heroku_email: ${{ secrets.HEROKU_EMAIL }}
+            region: eu
+            usedocker: true
+            appdir: rest_python
+            docker_build_args: |
+              BACKEND_API_URL
+          env:
+            BACKEND_API_URL: 'https://afa720227-rest-python.herokuapp.com'

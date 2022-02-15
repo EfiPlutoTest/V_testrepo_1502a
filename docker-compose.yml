@@ -1,0 +1,18 @@
+services:
+  frontend_react_with_rest:
+    build:
+      args:
+      - BACKEND_API_URL=${BACKEND_API_URL}
+      context: ./frontend_react_with_rest
+    environment:
+      PORT: 80
+    ports:
+    - 80:80
+  rest_python:
+    build:
+      context: ./rest_python
+    environment:
+      PORT: 8080
+    ports:
+    - 8080:8080
+version: '3.9'
